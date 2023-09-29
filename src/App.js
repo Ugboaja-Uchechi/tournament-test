@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import tournament from './Data/data.json';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai'
+import './App.css'
 
 const App = () => {
   const [round, setRound] = useState(1);
@@ -32,48 +33,69 @@ const App = () => {
     return number === round ? { backgroundColor: '#9CD326', color: '#fff' } : {};
   };
 
-  return (
-    <div>
-      <h1>Round {round}</h1>
-      <div>
-        <ul>
-          <li onClick={prevRound} disabled={round === 1}><AiOutlineLeft /></li>
-          <li onClick={() => goToRound(1)} style={getNumberStyle(1)}>1</li>
-          <li onClick={() => goToRound(2)} style={getNumberStyle(2)}>2</li>
-          <li onClick={() => goToRound(3)} style={getNumberStyle(3)}>3</li>
-          <li onClick={nextRound} disabled={round === maxRound}><AiOutlineRight /></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Challenger and Challenged</h2>
-        <ul>
-          {roundData.map((item, index) => (
-            <li key={index}>
-              {item.challenger ? `1 ${item.challenger.firstname} ${item.challenger.lastname}` : 'No challenger'}
-              &nbsp;vs&nbsp;
-              {item.challenged ? `2 ${item.challenged.firstname} ${item.challenged.lastname}` : 'Not challenged'}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h2>Winners</h2>
-          <ul>
-            {roundData.map((item, index) => (
-              <li key={index}>{item.winner ? item.winner.firstname : 'No winner'}</li>
-            ))}
-          </ul>
-      </div>
+  const getWinnerStyle = (item) => {
+    return item.winner ? { backgroundColor: '#82B020', color: '#fff' } : {};
+  };
 
-      <div>
-        <button onClick={prevRound} disabled={round === 1}>
-          Previous Round
-        </button>
-        <button onClick={nextRound} disabled={round === maxRound}>
-          Next Round
-        </button>
-      </div>
-    </div>
+  const getLoserStyle = (item) => {
+    return item.winner ? { backgroundColor: '#afafaf', color: '#fff' } : {};
+  };
+
+  return (
+    <main className='main'>
+      <div className='container'>
+        <div className='flex m-top'>
+          <h1>Round {round}</h1>
+          <ul className='flex cursor'>
+            <li onClick={prevRound} disabled={round === 1} className='num-list'><AiOutlineLeft /></li>
+            <li onClick={() => goToRound(1)} style={getNumberStyle(1)} className='num-list'>1</li>
+            <li onClick={() => goToRound(2)} style={getNumberStyle(2)} className='num-list'>2</li>
+            <li onClick={() => goToRound(3)} style={getNumberStyle(3)} className='num-list'>3</li>
+            <li onClick={nextRound} disabled={round === maxRound} className='num-list'><AiOutlineRight /></li>
+          </ul>
+        </div>
+        <div>
+          <div className='grid'>
+            <ul className='grid-inherit'>
+              {roundData.map((item, index) => (
+                  <li key={index}>
+                    <span className='numbers' style={getWinnerStyle(item)}>1 </span>
+                    <span className='names'>
+                      {item.challenger ? `${item.challenger.firstname} ${item.challenger.lastname}` : 'No challenger'}
+                      &nbsp; <br />  
+                    </span>
+                    <ul>
+                      <li>
+                        <span className='numbers num2' style={getLoserStyle(item)}>2 </span>
+                        <span className='names names2'>
+                          {item.challenged ? `${item.challenged.firstname} ${item.challenged.lastname}` : 'Not challenged'}  
+                        </span>
+                      </li>
+                    </ul>
+                  </li>
+              ))}
+              <li>
+                <ul className='match-status'>
+                  <li>Match is Ongoing</li>
+                  <li>Loser of the Match</li>
+                  <li>Winner of the Match</li>
+                </ul> 
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className='btn-cover'>
+          <button onClick={prevRound} disabled={round === 1} className='btn'>
+            Previous Round
+          </button>
+          <button onClick={nextRound} disabled={round === maxRound} className='btn'>
+            Next Round
+          </button>
+        </div>
+      </div>  
+    </main>
+
   );
 };
 

@@ -1,38 +1,179 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap');
+
+:root {
+  --inter: 'Inter', sans-serif;
+  --white: #fff;
+  --size14: 14px;
+  --size12: 12px;
+  --borderColor: #cfcfcf;
+  --border: 1px solid #cfcfcf;
+  --green: #9cd326;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background-color: #f7f7f7;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main {
+  margin: 0 auto;
+  margin-top: 7%;
+  width: 80%;
+  background-color: var(--white);
+  border: 1px solid var(--white);
+  border-radius: 10px;
+}
+
+h1 {
+  font-family: var(--inter);
+  font-weight: 600;
+  font-size: var(--size14);
+  margin-left: 1rem;
+}
+
+.flex {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+}
+
+.m-top {
+  margin-top: 1.5rem;
+  width: 90%;
+  border-bottom: 1px solid var(--borderColor);
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.num-list {
+  list-style-type: none;
+  padding-inline: .5rem;
+  border-radius: 5px;
+  font-family: var(--inter);
+  font-weight: 500;
+  font-size: var(--size12);
+}
+
+.grid {
+  margin-top: 2rem;
+}
+
+.grid-inherit {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 40px;
+  row-gap: 30px;
+}
+
+.grid-inherit li {
+  list-style-type: none;
+}
+
+li:nth-child(1),
+li:nth-child(4) {
+  justify-self: center;
+}
+
+li:nth-child(3) {
+  grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+li:nth-child(5) {
+  grid-row: 1/2;
+  grid-column: 3/4;
+}
+
+span {
+  border: var(--border);
+}
+
+.numbers {
+  border-bottom: none;
+  padding: 0.5rem;
+  border-top-left-radius: 10px;
+  font-size: var(--size14);
+}
+
+.num2 {
+  border: var(--border);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 10px;
+}
+
+.names {
+  display: inline-block;
+  border-left: none;
+  width: calc(2.5em * 5);
+  padding-block: 0.5rem;
+  padding-left: 0.5rem;
+  border-top-right-radius: 10px;
+  font-size: var(--size14);
+  font-family: var(--inter);
+  font-weight: 500;
+}
+
+.names2 {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 10px;
+  border-top: none;
+}
+
+.match-status li {
+  list-style-type: disc;
+  font-size: var(--size14);
+  font-family: var(--inter);
+  font-weight: 500;
+}
+
+::marker {
+  color: #82b020;
+  font-size: 150%;
+}
+
+.match-status li:nth-child(1)::marker {
+  color: #E89D2B;
+}
+
+.match-status li:nth-child(2)::marker {
+  color: #afafaf;
+}
+
+.btn-cover {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-block: 5rem;
 }
 
-.App-link {
-  color: #61dafb;
+.btn {
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+  margin-left: 1rem;
+  background-color: var(--green);
+  color: var(--white);
+  border: 1px solid var(--green);
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width: 721px) {
+  .main {
+    width: calc(100% - 20px);
   }
-  to {
-    transform: rotate(360deg);
+
+  .grid-inherit {
+    display: block;
+    margin-left: 2rem;
+  }
+
+  .grid-inherit li {
+    margin-bottom: 1rem;
   }
 }
